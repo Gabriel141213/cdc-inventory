@@ -1,3 +1,16 @@
+# CDC Inventory Project
+
+This project implements Change Data Capture (CDC) using Debezium, Apache Kafka, and PySpark to track and process changes in a MySQL database.
+
+## Prerequisites
+
+- Docker installed on your system
+- Python 3.8 or higher
+- pip package manager
+
+## Project Setup
+
+1. Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/your-repo/cdc-inventory.git
