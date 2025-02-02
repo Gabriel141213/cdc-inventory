@@ -10,6 +10,7 @@ from pyspark.sql.utils import AnalysisException
 
 AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY")
 AWS_SECRET_KEY = os.getenv("AWS_SECRET_KEY")
+REPO_PATH = os.getenv("REPO_PATH")
 
 # Create SparkSession with Delta Lake 2.0.0
 spark = SparkSession.builder \
@@ -60,12 +61,12 @@ def upsert_to_delta(batch_df, batch_id):
     if not batch_df.isEmpty():
         # Verificar se a tabela Delta existe, se não, criar
         try:
-            delta_table = DeltaTable.forPath(spark, "/home/gassuncao/cdc-tests/customers")
+            delta_table = DeltaTable.forPath(spark, f"{REPO_PATH}/customers")
         except:
             # Criar a tabela Delta se não existir
             empty_df = spark.createDataFrame([], schema=after_schema)
-            empty_df.write.format("delta").save("/home/gassuncao/cdc-tests/customers")
-            delta_table = DeltaTable.forPath(spark, "/home/gassuncao/cdc-tests/customers")
+            empty_df.write.format("delta").save(f"{REPO_PATH}/customers")
+            delta_table = DeltaTable.forPath(spark, f"{REPO_PATH}/customers")
                 
         # Separar os diferentes tipos de operação
         insert_df = batch_df.filter((col("op") == "c") | (col("op") == "r") | (col("op") == "u")).drop("op")
