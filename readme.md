@@ -18,10 +18,11 @@ cd cdc-inventory
 pip install -r requirements.txt
 ```
 
-2. Create a `.env` file in the project root with your AWS credentials:
+2. Create a `.env` file in the project root with your AWS credentials and SO Repository path:
 ```bash
 AWS_ACCESS_KEY_ID=your_access_key_id
 AWS_SECRET_ACCESS_KEY=your_secret_access_key
+REPO_PATH=your_repository_path
 ```
 ## Starting the Infrastructure
 
